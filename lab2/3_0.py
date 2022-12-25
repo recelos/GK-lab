@@ -19,8 +19,8 @@ def shutdown():
 def render(time):
     glClear(GL_COLOR_BUFFER_BIT)
 
-    glColor3f(0.0, 1.0, 0.0)
     glBegin(GL_TRIANGLES)
+    glColor3f(0.0, 0.0, 0.0)
     glVertex2f(0.0, 0.0)
     glColor3f(0.0, 1.0, 1.0)
     glVertex2f(0.0, 50.0)
@@ -28,10 +28,10 @@ def render(time):
     glVertex2f(50.0, 0.0)
     glEnd()
 
-    glColor3f(0.0, 0.0, 0.0)
     glBegin(GL_TRIANGLES)
+    glColor3f(0.0, 0.0, 0.0)
     glVertex2f(0.0, 0.0)
-    glColor3f(0.5, 1.0, 0.0)
+    glColor3f(0.0, 1.0, 1.0)
     glVertex2f(0.0, 50.0)
     glColor3f(0.0, 1.0, 0.5)
     glVertex2f(-50.0, 0.0)

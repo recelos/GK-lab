@@ -19,27 +19,26 @@ def shutdown():
 def render(time):
     glClear(GL_COLOR_BUFFER_BIT)
 
-    print_rectangle(-20.0, -20.0, 10.0, 10.0)
+    print_triangle(-20.0, -20.0, 80.0, 40.0)
 
     glFlush()
 
 
 
-def print_rectangle(x, y, a, b):
+def print_triangle(x, y, a, b):
     glColor3f(1.0, 0.0, 0.0)
     glBegin(GL_TRIANGLES)
-    glVertex2f(x + a, y + b)
     glVertex2f(x, y)
     glVertex2f(x + a, y)
+    glVertex2f(x + a, y + b)
     glEnd()
-
 
 
     glColor3f(0.0, 1.0, 0.0)
     glBegin(GL_TRIANGLES)
-    glVertex2f(x + a, y + b)
-    glVertex2f(x, y + b)
     glVertex2f(x, y)
+    glVertex2f(x, y + b)
+    glVertex2f(x + a, y + b)
     glEnd()
 
 

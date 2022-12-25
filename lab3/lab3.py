@@ -6,47 +6,42 @@ from glfw.GLFW import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-import random
-
-# generating random color
-c1 = random.randint(0, 255)
-c2 = random.randint(0, 255)
-c3 = random.randint(0, 255)
-
 
 def startup():
     update_viewport(None, 400, 400)
-    glClearColor(0.5, 0.5, 0.5, 1.0)
+    glClearColor(0.0, 0.0, 0.0, 1.0)
+    glEnable(GL_DEPTH_TEST)
 
 
 def shutdown():
     pass
 
 
-def render(time):
-    glClear(GL_COLOR_BUFFER_BIT)
+def axes():
+    glBegin(GL_LINES)
 
-    print_rectangle(-50.0, -50.0, 100.0, 100.0)
+    glColor3f(1.0, 0.0, 0.0)
+    glVertex3f(-5.0, 0.0, 0.0)
+    glVertex3f(5.0, 0.0, 0.0)
+
+    glColor3f(0.0, 1.0, 0.0)
+    glVertex3f(0.0, -5.0, 0.0)
+    glVertex3f(0.0, 5.0, 0.0)
+
+    glColor3f(0.0, 0.0, 1.0)
+    glVertex3f(0.0, 0.0, -5.0)
+    glVertex3f(0.0, 0.0, 5.0)
+
+    glEnd()
+
+
+def render(time):
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glLoadIdentity()
+
+    axes()
 
     glFlush()
-
-
-def print_rectangle(x, y, a, b, d=0):
-    random.seed()
-
-    glColor3b(c1, c2, c3)
-    glBegin(GL_TRIANGLES)
-    glVertex2f(x + a, y + b)
-    glVertex2f(x, y)
-    glVertex2f(x + a, y)
-    glEnd()
-
-    glColor3b(c1, c2, c3)
-    glBegin(GL_TRIANGLES)
-    glVertex2f(x + a, y + b)
-    glVertex2f(x, y + b)
-    glVertex2f(x, y)
-    glEnd()
 
 
 def update_viewport(window, width, height):
@@ -61,11 +56,9 @@ def update_viewport(window, width, height):
     glLoadIdentity()
 
     if width <= height:
-        glOrtho(-100.0, 100.0, -100.0 / aspect_ratio, 100.0 / aspect_ratio,
-                1.0, -1.0)
+        glOrtho(-7.5, 7.5, -7.5 / aspect_ratio, 7.5 / aspect_ratio, 7.5, -7.5)
     else:
-        glOrtho(-100.0 * aspect_ratio, 100.0 * aspect_ratio, -100.0, 100.0,
-                1.0, -1.0)
+        glOrtho(-7.5 * aspect_ratio, 7.5 * aspect_ratio, -7.5, 7.5, 7.5, -7.5)
 
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()

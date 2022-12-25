@@ -7,11 +7,9 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 import random
+import time
 
 random.seed()
-c1 = random.randint(0, 255)
-c2 = random.randint(0, 255)
-c3 = random.randint(0, 255)
 
 
 def startup():
@@ -21,33 +19,35 @@ def startup():
 def shutdown():
     pass
 
-def render(time):
+def render():
+    c1 = random.randint(0, 255)
+    c2 = random.randint(0, 255)
+    c3 = random.randint(0, 255)
+    
+    d_a = random.randint(-50, 50)
+    d_b = random.randint(-50, 50)
+
+
     glClear(GL_COLOR_BUFFER_BIT)
 
-    print_rectangle(-50.0, -50.0, 100.0, 100.0, -14)
+    print_rectangle(-50.0, -50.0, 100.0, 100.0, c1, c2, c3, d_a, d_b)
 
     glFlush()
-
-def print_sierpinski_carpet(x, a, b, y, s = 3)
-    s -= 1
-    if (s == 0)
-        return
-    
-    
+    time.sleep(0.25)
 
 
-def print_rectangle(x, y, a, b, d = 0.0):
+def print_rectangle(x, y, a, b, c1, c2, c3, d_a = 0, d_b = 0):
     glColor3b(c1, c2, c3)
     glBegin(GL_TRIANGLES)
-    glVertex2f(x + a, y + b)
+    glVertex2f(x + a + d_a, y + b + d_b)
     glVertex2f(x, y)
-    glVertex2f(x + a, y)
+    glVertex2f(x + a + d_a, y)
     glEnd()
 
     glColor3b(c1, c2, c3)
     glBegin(GL_TRIANGLES)
-    glVertex2f(x + a, y + b)
-    glVertex2f(x, y + b)
+    glVertex2f(x + a + d_a, y + b + d_b)
+    glVertex2f(x, y + b + d_b)
     glVertex2f(x, y)
     glEnd()
 
@@ -89,7 +89,7 @@ def main():
 
     startup()
     while not glfwWindowShouldClose(window):
-        render(glfwGetTime())
+        render()
         glfwSwapBuffers(window)
         glfwPollEvents()
     shutdown()
