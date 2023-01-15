@@ -15,12 +15,15 @@ pix2angle = 1.0
 piy2angle = 1.0
 
 left_mouse_button_pressed = 0
+right_mouse_button_pressed = 0
+
 mouse_x_pos_old = 0
 delta_x = 0
 mouse_y_pos_old = 0
 delta_y = 0
 
-
+scale = 1.0
+scale_modifier = 0.01
 
 def startup():
     update_viewport(None, 400, 400)
@@ -88,6 +91,7 @@ def example_object():
 def render(time):
     global theta
     global phi
+    global scale
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
@@ -96,11 +100,17 @@ def render(time):
               0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
 
     if left_mouse_button_pressed:
-        theta += delta_x * pix2angle
-        phi += delta_y * piy2angle
+        phi += delta_x * pix2angle
+        theta += delta_y * piy2angle
+
+    if right_mouse_button_pressed:
+        scale += -delta_y * scale_modifier
+        #scale up on mouse going up
 
     glRotatef(theta, 1.0, 0.0, 0.0)
     glRotatef(phi, 0.0, 1.0, 0.0)
+
+    glScale(scale, scale, scale)
 
     axes()
     example_object()
@@ -148,11 +158,16 @@ def mouse_motion_callback(window, x_pos, y_pos):
 
 def mouse_button_callback(window, button, action, mods):
     global left_mouse_button_pressed
+    global right_mouse_button_pressed
 
     if button == GLFW_MOUSE_BUTTON_LEFT and action == GLFW_PRESS:
         left_mouse_button_pressed = 1
     else:
         left_mouse_button_pressed = 0
+    if button == GLFW_MOUSE_BUTTON_RIGHT and action == GLFW_PRESS:
+        right_mouse_button_pressed = 1
+    else:
+        right_mouse_button_pressed = 0
 
 
 def main():
