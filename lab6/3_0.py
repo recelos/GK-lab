@@ -93,7 +93,7 @@ def render(time):
     glVertex3f(-5.0, -5.0, 0.0)
     glTexCoord2f(1.0, 0.0)
     glVertex3f(5.0, -5.0, 0.0)
-    glTexCoord2f(0, 1.0)
+    glTexCoord2f(0.0, 1.0)
     glVertex3f(-5.0, 5.0, 0.0)
     glEnd()
 
