@@ -8,6 +8,7 @@ from OpenGL.GLU import *
 
 from PIL import Image
 
+from os import startfile
 
 viewer = [0.0, 0.0, 10.0]
 
@@ -292,4 +293,5 @@ def main():
 
 
 if __name__ == '__main__':
+    startfile(".\saul.mp3")
     main()
